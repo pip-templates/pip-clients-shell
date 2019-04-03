@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(196, 238, 224);
+}
+
+tr:nth-child(even) td div {
+    border-bottom: 4px solid red;
+}
+
+tr:nth-child(odd) td div {
+    border-top: 2px solid green;
+}
+
+.active {
+    background-color: rgb(96, 218, 96);
+}

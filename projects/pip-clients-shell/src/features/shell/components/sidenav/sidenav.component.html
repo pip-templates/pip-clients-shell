@@ -1,0 +1,29 @@
+<div fxHide fxShow.lt-md>
+  <div class="pip-site-picker" (click)="toggleSitesView()" fxLayout="row" fxLayoutAlign=" center">
+    <img src="https://via.placeholder.com/48" />
+    <div fxFlex="grow">{{ currentSite?.name }}</div>
+    <mat-icon [ngClass]="{'rotated': (sitesOpened$ | async)}">arrow_drop_down</mat-icon>
+  </div>
+</div>
+<pip-nav-menu *ngIf="!(sitesMode$ | async)"></pip-nav-menu>
+<div *ngIf="(sitesMode$ | async) && sites && sites.length">
+  <div fxFlex="grow">
+    <mat-nav-list dense>
+      <ng-container *ngFor="let site of sites">
+        <mat-list-item (click)="changeSite(site)" *ngIf="site?.id !== currentSite?.id">
+          <img matListAvatar src="https://via.placeholder.com/48" />
+          <h3 matLine class="pip-link-title">{{ site.name }}</h3>
+        </mat-list-item>
+      </ng-container>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon matListIcon>add_box</mat-icon>
+        <h3 matLine class="pip-link-title">{{ 'SiDENAV.SITE.CONNECT' | translate }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>remove_circle</mat-icon>
+        <h3 matLine class="pip-link-title">{{ 'SiDENAV.SITE.DISCONNECT' | translate }}</h3>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</div>

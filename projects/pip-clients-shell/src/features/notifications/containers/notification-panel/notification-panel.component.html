@@ -1,0 +1,61 @@
+<ng-container [ngSwitch]="state$ | async">
+    <pip-empty-state *ngSwitchCase="'empty'">
+        <pip-empty-state-title [text]="'NOTIFICATIONS_EMPTY' | translate" [subText]="'NOTIFICATIONS_EMPTY_SUB' | translate"
+                               imageUrl="./assets/empty.svg"></pip-empty-state-title>
+    </pip-empty-state>
+    <pip-empty-state *ngSwitchCase="'progress'">
+        <div class="loader"> <img src="./assets/pre-loading.svg"> </div>
+    </pip-empty-state>
+    <ng-container *ngSwitchCase="'data'">
+        <ng-container [ngSwitch]="panelState$ | async">
+            <ng-container *ngSwitchCase="'Notifications'">
+                <mat-nav-list dense fxFlex="grow">
+                    <ng-container *ngFor="let n of notifications$ | async">
+                        <mat-list-item (click)="selectNotification(n)">
+                            <div class="pip-notification-item" fxFlex="grow" fxLayout="row" fxLayoutAlign=" center">
+                                <img matListAvatar src="https://via.placeholder.com/48" />
+                                <div class="pip-notification-title">
+                                    <h3 matLine class="pip-link-title">{{ n?.label }}</h3>
+                                    <p mat-line>{{ n?.object?.name }}</p>
+                                </div>
+                                <div fxFlex="0 0 20%">
+                                    <mat-icon *ngIf="n.icon && n.icon.name" [color]="n.icon && n.icon.color || 'primary'">{{
+                                        n.icon.name }}</mat-icon>
+                                    <div>{{ n.date | amTimeAgo:true }}</div>
+                                </div>
+                            </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </ng-container>
+                </mat-nav-list>
+                <div class="pip-notifications-actions" fxLayout="row" fxLayoutAlign="space-around center">
+                    <button mat-button disableRipple>{{ 'NOTIFICATIONS_CLOSE_ALL' | translate }}</button>
+                    <button mat-button disableRipple>{{ 'NOTIFICATIONS_SHOW_MORE' | translate }}</button>
+                </div>
+            </ng-container>
+            <div *ngSwitchCase="'Details'" fxFlex="grow" fxLayout="column">
+                <ng-container *ngIf="currentNotification$ | async as n">
+                    <mat-list dense fxFlex="grow">
+                        <mat-list-item>
+                            <img matListAvatar src="https://via.placeholder.com/48" />
+                            <h3 matLine class="pip-link-title">{{ n.label }}</h3>
+                            <p mat-line>{{ n?.object?.name }}</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>access_time</mat-icon>
+                            <h3 matLine class="pip-link-title">{{ n.date | amTimeAgo }}</h3>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>info</mat-icon>
+                            <h3 matLine class="pip-link-title">{{ n.info }}</h3>
+                        </mat-list-item>
+                    </mat-list>
+                    <div class="pip-notifications-actions" fxLayout="row" fxLayoutAlign="space-around center">
+                        <button mat-button disableRipple>{{ 'NOTIFICATIONS_CLOSE' | translate }}</button>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
+
+</ng-container>

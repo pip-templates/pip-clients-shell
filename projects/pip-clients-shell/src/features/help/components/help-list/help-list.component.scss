@@ -1,0 +1,16 @@
+@import '~pip-webui2-themes/variables';
+@mixin pip-help-list-mixin($theme) {
+    $foreground: map-get($theme, foreground);
+    :host {
+        mat-list-item {
+            border-bottom: 1px solid mat-color($foreground, 'divider');
+        }
+    }
+}
+
+@each $class,
+$theme in $themes {
+    .#{$class} {
+        @include pip-help-list-mixin($theme);
+    }
+}

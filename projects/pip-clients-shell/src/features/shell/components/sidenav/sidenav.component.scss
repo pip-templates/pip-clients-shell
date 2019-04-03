@@ -1,0 +1,36 @@
+@import '~pip-webui2-themes/variables';
+.pip-site-picker {
+    padding: 16px 16px 16px 0;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    img {
+        margin: 0 16px;
+        border-radius: 50%;
+        max-width: 48px;
+    }
+    mat-icon {
+        transition: .3s all ease-in-out;
+        &.rotated {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+}
+
+@mixin pip-sidenav-mixin($theme) {
+    $primary: map-get($theme, primary);
+    :host {
+        .pip-site-picker {
+            background-color: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+        }
+    }
+}
+
+@each $class, $theme in $themes {
+    .#{$class} {
+        @include pip-sidenav-mixin($theme);
+    }
+}

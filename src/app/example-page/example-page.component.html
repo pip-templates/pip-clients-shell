@@ -1,0 +1,70 @@
+<p>
+  example-page works!
+</p>
+<div>
+  Shadows control:
+  <button mat-raised-button (click)="toggleShadow('left')">left</button>
+  <button mat-raised-button (click)="toggleShadow('top')">top</button>
+  <button mat-raised-button (click)="toggleShadow('right')">right</button>
+</div>
+<div [fxHide]="media.isMainActive('lt-md')">hide lt-md</div>
+<div fxHide.lt-md>hide lt-md too</div>
+
+<div fxflex fxLayout="column">
+  <div fxFlexOffset.lt-sm="50px">And this one should have offset (50px)</div>
+</div>
+<button mat-flat-button color="primary" [routerLink]="['/another']">go to another</button>
+<button mat-flat-button color="warn" [routerLink]="['/bad-route']">go to 404</button>
+
+<table border="1" frame="void" rules="all">
+  <tr>
+    <th>{{ windowSize }}</th>
+    <th *ngFor="let bp of bps" [ngClass]="{'active': fxMedia.isActive(bp.mediaQuery)}">{{ bp.alias }}</th>
+  </tr>
+  <tr>
+    <td>fxShow</td>
+    <td *ngFor="let bp of bps"><div [fxShow]="fxMedia.isActive(bp.mediaQuery)">+</div></td>
+  </tr>
+  <tr>
+    <td>fxShow.</td>
+    <td><div fxHide fxShow.xs>+</div></td>
+    <td><div fxHide fxShow.gt-xs>+</div></td>
+    <td><div fxHide fxShow.lt-sm>+</div></td>
+    <td><div fxHide fxShow.sm>+</div></td>
+    <td><div fxHide fxShow.gt-sm>+</div></td>
+    <td><div fxHide fxShow.lt-md>+</div></td>
+    <td><div fxHide fxShow.md>+</div></td>
+    <td><div fxHide fxShow.gt-md>+</div></td>
+    <td><div fxHide fxShow.lt-lg>+</div></td>
+    <td><div fxHide fxShow.lg>+</div></td>
+    <td><div fxHide fxShow.gt-lg>+</div></td>
+    <td><div fxHide fxShow.lt-xl>+</div></td>
+    <td><div fxHide fxShow.xl>+</div></td>
+    <td><div fxHide fxShow.document-lt-lg>+</div></td>
+  </tr>
+  <tr>
+    <td>fxHide</td>
+    <td *ngFor="let bp of bps"><div [fxHide]="fxMedia.isActive(bp.mediaQuery)">+</div></td>
+  </tr>
+  <tr>
+    <td>fxHide.</td>
+    <td><div fxHide.xs>+</div></td>
+    <td><div fxHide.gt-xs>+</div></td>
+    <td><div fxHide.lt-sm>+</div></td>
+    <td><div fxHide.sm>+</div></td>
+    <td><div fxHide.gt-sm>+</div></td>
+    <td><div fxHide.lt-md>+</div></td>
+    <td><div fxHide.md>+</div></td>
+    <td><div fxHide.gt-md>+</div></td>
+    <td><div fxHide.lt-lg>+</div></td>
+    <td><div fxHide.lg>+</div></td>
+    <td><div fxHide.gt-lg>+</div></td>
+    <td><div fxHide.lt-xl>+</div></td>
+    <td><div fxHide.xl>+</div></td>
+    <td><div fxHide.document-lt-lg>+</div></td>
+  </tr>
+  <tr>
+    <td>mainActive</td>
+    <td *ngFor="let bp of bps"><div [fxShow]="media.isMainActive(bp.alias)">+</div></td>
+  </tr>
+</table>

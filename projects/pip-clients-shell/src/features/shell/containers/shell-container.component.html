@@ -1,0 +1,53 @@
+<pip-root-layout>
+    <pip-rightnav-floating>
+        <div class="pip-rightnav-header" fxLayout="row" fxLayoutAlign=" center">
+            <mat-icon [ngStyle]="{'opacity': (rightnav.showBack$ | async) ? '1' : '0'}" [disabled]="!(rightnav.showBack$ | async)"
+                      (click)="rightnav.goBackHandler()">arrow_back</mat-icon>
+            <div class="pip-rigntnav-title" fxFlex="grow">{{ rightnav.title$ | async | translate }}</div>
+            <mat-icon (click)="closeRightnav()">close</mat-icon>
+        </div>
+        <ng-container [ngSwitch]="rightnav.state$ | async">
+            <pip-help-panel *ngSwitchCase="'Help'"></pip-help-panel>
+            <pip-notifications-panel *ngSwitchCase="'Notifications'"></pip-notifications-panel>
+        </ng-container>
+    </pip-rightnav-floating>
+    <!-- Content -->
+    <pip-root-content>
+        <!-- Appbar -->
+        <pip-appbar>
+            <pip-nav-icon> </pip-nav-icon>
+            <pip-breadcrumb> </pip-breadcrumb>
+            <div fxFlex></div>
+            <div fxHide.lt-md *ngIf="isAuthorized$ | async">
+                <button class="pip-shell-sites-button" mat-button [matMenuTriggerFor]="sites" #sitesTrigger="matMenuTrigger"
+                        *ngIf="(sitesState$ | async) === 'data' && (currentSite$ | async)">
+                    <span>{{ (currentSite$ | async).name }}</span>
+                    <mat-icon>{{ sitesTrigger.menuOpen ? 'arrow_drop_up' : 'arrow_drop_down' }}</mat-icon>
+                </button>
+                <mat-menu #sites>
+                    <ng-container *ngFor="let site of sites$ | async">
+                        <button mat-menu-item *ngIf="site.id !== (currentSite$ | async)?.id" (click)="changeCurrentSite(site)">{{
+                            site.name }}</button>
+                    </ng-container>
+                </mat-menu>
+            </div>
+            <pip-primary-actions></pip-primary-actions>
+            <pip-secondary-actions></pip-secondary-actions>
+        </pip-appbar>
+        <!-- Main -->
+        <pip-main-layout-alt fxFlex="grow">
+            <!-- Sidenav -->
+            <pip-sidenav *ngIf="isAuthorized$ | async">
+                <pip-sidenav [groups]="applicationsGroups$ | async" [sites]="sites$ | async" [currentSite]="currentSite$ | async"
+                             [language]="language$ | async" (changeCurrentSite)="changeCurrentSite($event)"></pip-sidenav>
+            </pip-sidenav>
+            <!-- Content -->
+            <pip-main-content>
+                <pip-shadow [visible]="(config$ | async).shadows.top" attachmentSide="top"> </pip-shadow>
+                <pip-shadow [visible]="(config$ | async).shadows.left" attachmentSide="left"></pip-shadow>
+                <pip-shadow [visible]="(config$ | async).shadows.right" attachmentSide="right"></pip-shadow>
+                <router-outlet></router-outlet>
+            </pip-main-content>
+        </pip-main-layout-alt>
+    </pip-root-content>
+</pip-root-layout>

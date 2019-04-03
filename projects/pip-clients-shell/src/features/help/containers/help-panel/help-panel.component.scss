@@ -1,0 +1,25 @@
+$search-height: 40px;
+
+:host {
+    display: block;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    pip-search-input {
+        min-height: $search-height;
+        width: auto;
+        margin: 0 12px;
+        mat-form-field {
+            max-width: 100%;
+            /deep/ .mat-form-field-wrapper {
+                height: $search-height;
+                .mat-form-field-flex {
+                    border-radius: $search-height;
+                    font-size: 14px;
+                    line-height: 14px;
+                }
+            }
+        }
+    }
+    .pip-help-panel-article {
+        padding: 12px;
+    }
+}

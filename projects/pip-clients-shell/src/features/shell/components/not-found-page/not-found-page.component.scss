@@ -1,0 +1,7 @@
+:host {
+    flex: 1 1 100%;
+}
+
+/deep/ pip-empty-state-actions button:not(:first-child) {
+    margin-top: 8px!important;
+}

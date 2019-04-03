@@ -1,0 +1,26 @@
+{
+  "name": "pip-clients-shell",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ngrx/effects": "^7.0.0-beta.1",
+    "@ngrx/store": "^7.0.0-beta.1",
+    "@ngx-translate/core": "^11.0.1",
+    "angular-2-local-storage": "^2.0.0",
+    "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "ngx-moment": "^3.3.0",
+    "pip-webui2-controls": "^1.1.7",
+    "pip-webui2-layouts": "^1.1.10",
+    "pip-webui2-nav": "^1.1.9",
+    "pip-webui2-themes": "^1.1.10"
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^7.2.0",
+    "@angular/common": "~7.1.4",
+    "@angular/core": "~7.1.4",
+    "@angular/flex-layout": "^7.0.0-beta.23",
+    "@angular/material": "^7.2.0",
+    "@angular/router": "~7.1.4"
+  }
+}

@@ -1,0 +1,24 @@
+<pip-search-input *ngIf="(helpPanelService.state$ | async) === 'Topics' || (helpPanelService.state$ | async) === 'Search'">
+    <mat-form-field class="search-field" floatLabel="never" appearance="fill">
+        <mat-icon matPrefix fontIcon="webui-search"></mat-icon>
+        <input matInput placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" name="search" [formControl]="searchControl">
+    </mat-form-field>
+</pip-search-input>
+<pip-scrollable>
+    <pip-scrollable-content [ngSwitch]="helpPanelService.state$ | async">
+        <ng-container *ngSwitchCase="'Search'">
+            <div class="pip-help-panel-article" *ngIf="!filteredArticles || !filteredArticles?.length">
+                {{ 'HELP_PANEL_NOT_FOUND' | translate }}
+            </div>
+            <pip-help-list *ngIf="filteredArticles && filteredArticles.length" [items]="filteredArticles" (select)="selectArticle($event)"></pip-help-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Topics'">
+            <pip-help-list [items]="topics" (select)="selectTopic($event)"></pip-help-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Articles'">
+            <pip-help-list [items]="helpPanelService.currentTopic.articles" (select)="selectArticle($event)"></pip-help-list>
+        </ng-container>
+        <div class="pip-help-panel-article" *ngSwitchCase="'Article'" [innerHtml]="helpPanelService.currentArticle.content">
+        </div>
+    </pip-scrollable-content>
+</pip-scrollable>

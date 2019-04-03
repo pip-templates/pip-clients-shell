@@ -1,0 +1,20 @@
+.pip-rightnav-header {
+    padding: 12px;
+    cursor: pointer;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    .pip-rigntnav-title {
+        margin-left: 0.5em;
+    }
+}
+
+/deep/ mat-sidenav.pip-sidenav, mat-sidenav.pip-rightnav {
+    width: 320px!important;
+    max-width: 320px!important;
+}
+
+/deep/ .pip-gt-lg {
+    mat-sidenav.pip-sidenav , mat-sidenav.pip-rightnav {
+        width: 480px!important;
+        max-width: 480px!important;
+    }
+}
